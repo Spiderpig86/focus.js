@@ -7,7 +7,7 @@
     /**
      * CONSTANTS
      */
-    const ZOOMFACTOR = "250%"; // Default zoom factor of the image when user hovers with mouse
+    var ZOOMFACTOR = "250%"; // Default zoom factor of the image when user hovers with mouse
 
     /**
      * Initializes the focus object with properties and methods

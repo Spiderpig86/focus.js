@@ -1,0 +1,19 @@
+// Automate builds
+
+var gulp = require('gulp');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var pump = require('pump');
+
+var vanillaSrc = './src/vanilla/focus.js',
+    vanillaDest = './dist/vanilla';
+
+gulp.task('vanilla', function(cb) {
+    pump([
+        gulp.src(vanillaSrc),
+        concat('focus.min.js'),
+        uglify(),
+        gulp.dest(vanillaDest)
+    ],
+    cb);
+});
