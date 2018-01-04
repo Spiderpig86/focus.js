@@ -25,7 +25,9 @@
   "homepage": "https://github.com/Spiderpig86/focus.js#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
     "gulp-concat": "^2.6.1",
+    "gulp-size": "^3.0.0",
     "gulp-uglify": "^3.0.0",
     "pump": "^2.0.0"
   }
