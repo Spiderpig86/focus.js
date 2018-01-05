@@ -13,14 +13,15 @@
      * Initializes the focus object with properties and methods
      */
     function init() {
+        console.log('Initializing focus.js...');
         var Focus = {};
         Focus.init = function(elID) {
             // Iterate over all elements in the container by class
-            var container = document.getElementById(elID); // The container
-            var focusImgs = container.getElementsByClassName('.focus-img'); // Get all the elements in the container that support zooming
+            var container = (elID !== '') ? document.getElementById(elID) : document; // The container
+            var focusImgs = container.getElementsByClassName('focus-img'); // Get all the elements in the container that support zooming
 
             // Add handlers for each image element
-            focusImgs.forEach(function(img) {
+            Array.from(focusImgs).forEach(function(img) {
 
                 // Add handler for mouse enter
                 img.addEventListener('mouseenter', function(e) {
@@ -43,7 +44,7 @@
 
                     // Update the image background position
                     this.style.backgroundPosition = percentX + '% ' + percentY + '%';
-
+                        
                 }, false);
 
                 // Add handler for when the user leaves

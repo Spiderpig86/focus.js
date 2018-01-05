@@ -1,4 +1,11 @@
 .focus-img {
     background-size: cover;
+    background-position: center center;
     cursor: pointer;
+}
+
+.focus-img.smoother {
+    /* Slight delay to lower the stuttering */
+    -webkit-transition: all .2s;
+    transition: all .2s
 }
