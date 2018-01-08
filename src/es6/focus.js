@@ -4,6 +4,17 @@
 
  class FocusImg {
 
+    /**
+     * Constructor for the focus image component
+     * @param {FoucsImgConfig} imageParams - {
+     *      imageSrc: String,
+     *      parentElement: HTMLElement,
+     *      zoomFactor: String,
+     *      smoother: boolean,
+     *      width: String,
+     *      height: String
+     * }
+     */
     constructor(imageParams) {
 
         this.DEFAULT_IMAGE_SRC = 'http://via.placeholder.com/500?text=focus.js';
@@ -13,22 +24,12 @@
             imageSrc: this.DEFAULT_IMAGE_SRC,
             parentElement: null,
             zoomFactor: '250%',
-            smoother: true
+            smoother: true,
+            width: '100%', // Scale to parent component by default
+            height: '66.7%' // Scale to percent of height by default
         }
 
         this.focusImg = document.createElement('div');
-
-        // Load the image and try to get the height
-        let image = new Image();
-        image.onload = () => {
-            this.imgWidth = image.Width;
-            this.imgHeight = image.Height;
-        };
-        image.onerror = () => {
-            this.imageSrc = this.DEFAULT_IMAGE_SRC;
-            this.imgWidth = 500;
-            this.imgWidth = 500;
-        };
 
         // Apply given params to the object
         if (params)
@@ -84,6 +85,8 @@
                 background-image: url(${imageSrc});
                 background-size: cover;
                 background-position: center center;
+                width: ${this.params.width};
+                height: ${this.params.height};
             ">
             </div>
         `;
