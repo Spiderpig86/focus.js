@@ -18,4 +18,12 @@
 * To reduce stuttering on the image, add the `smoother` class to the images you want.
 
 ## Demo
-* [Basic Portfolio Website](https://spiderpig86.github.io/focus.js/test/vanilla/index.html)
+* [Basic Portfolio Website - Vanilla](https://spiderpig86.github.io/focus.js/test/vanilla/index.html)
+
+## Todo
+* Add option for changing image scaling with mouse wheel.
+* Add more events such as `mouseclick`, `grab`, and `toggle`.
+* Add support for callbacks on image load, zooming in, and zooming out.
+* Add option to change cursor type.
+* Add display for magnification and location.
+* Add support for external toggles.
