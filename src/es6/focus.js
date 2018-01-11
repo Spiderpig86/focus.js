@@ -6,7 +6,7 @@
 
     /**
      * Constructor for the focus image component
-     * @param {FoucsImgConfig} imageParams - {
+     * @param {FocusImgConfig} imageParams - {
      *      imageSrc: String,
      *      parentElement: HTMLElement,
      *      zoomFactor: String,
@@ -16,6 +16,7 @@
      * }
      */
     constructor(imageParams) {
+        console.log('test');
 
         this.DEFAULT_IMAGE_SRC = 'http://via.placeholder.com/500?text=focus.js';
 
@@ -37,6 +38,8 @@
 
         this.render();
         this.bindEvents();
+
+        return this;
     }
 
     /**
@@ -92,6 +95,7 @@
         `;
         // Append it to the parent
         this.params.parentElement.appendChild(this.focusImg);
+        console.log(this.focusImg);
     }
  }
 
