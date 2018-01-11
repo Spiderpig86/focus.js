@@ -108,8 +108,6 @@ var FocusImg = function () {
     function FocusImg(imageParams) {
         _classCallCheck(this, FocusImg);
 
-        console.log('test');
-
         this.DEFAULT_IMAGE_SRC = 'http://via.placeholder.com/500?text=focus.js';
 
         // Initialize default properties for image
@@ -125,7 +123,7 @@ var FocusImg = function () {
         this.focusImg = document.createElement('div');
 
         // Apply given params to the object
-        if (params) Object.assign(this.params, imageParams);
+        if (imageParams) Object.assign(this.params, imageParams);
 
         this.render();
         this.bindEvents();
@@ -145,7 +143,7 @@ var FocusImg = function () {
 
             // Zoom in on hover
             this.focusImg.addEventListener('mouseover', function (e) {
-                _this.focusImg.style.backgroundSize = _this.params.zoomFactor;
+                _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = _this.params.zoomFactor;
             }, false);
 
             // Pan the image proportional to the cursor location
@@ -161,13 +159,13 @@ var FocusImg = function () {
                 var percentY = Math.round(100 / (dimensions.height / relY));
 
                 // Update the image background position
-                _this.focusImg.style.backgroundPosition = percentX + '% ' + percentY + '%';
+                _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = percentX + '% ' + percentY + '%';
             }, false);
 
             // Revert image view back to normal after mouse exits
             this.focusImg.addEventListener('mouseleave', function (e) {
-                _this.focusImg.style.backgroundPosition = 'center';
-                _this.focusImg.style.backgroundSize = 'cover';
+                _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = 'center';
+                _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = 'cover';
             }, false);
         }
 
@@ -178,11 +176,14 @@ var FocusImg = function () {
     }, {
         key: 'render',
         value: function render() {
+
             // Set the image element
-            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (smoother ? 'smoother' : '') + '"\n            style="\n                background-image: url(' + imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: ' + this.params.width + ';\n                height: ' + this.params.height + ';\n            ">\n            </div>\n        ';
-            // Append it to the parent
+            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            </div>\n        ';
+
+            this.focusImg.style.width = this.params.width;
+
+            // Append to parent
             this.params.parentElement.appendChild(this.focusImg);
-            console.log(this.focusImg);
         }
     }]);
 
