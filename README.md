@@ -36,6 +36,7 @@
     };
     new FocusImage(config); // Object will automatically be appended to the parent element
     ```
+* In any page that uses `focus.js`, ensure to include the packed version of your app `APP_NAME.min.js`.
 * Ensure that the files for `focus.js` can be found in your routing configuration.
 * To run, execute `node ./YOUR_DIR/route.js` or your custom script.
 
