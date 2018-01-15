@@ -17,6 +17,28 @@
 * Add the `focus-img` class to any image you want to be zoomable.
 * To reduce stuttering on the image, add the `smoother` class to the images you want.
 
+### Node/ES6
+* To use this, ensure that `babel`, `babel-loader`, `babel-preset-es2015`, and `webpack` are installed as dependencies for your project.
+* Also, an unpacked version of `focus.js` will also be needed which can be found in `./dist/es6/focus.js`.
+* For your entry script (app.js for example), ensure to import `FocusImage` from `focus.js`.
+    ```javascript
+    import FocusImage from './YOUR_DIR/focus'
+    ```
+* To construct a new FocusImage instance, create a config object and pass it into the constructor.
+    ```javascript
+    let config = {
+        imageSrc: 'https://source.unsplash.com/category/nature/1024x768',
+        parentElement: null,
+        zoomFactor: '250%',
+        smoother: true,
+        width: '100%',
+        height: '66.7%'
+    };
+    new FocusImage(config); // Object will automatically be appended to the parent element
+    ```
+* Ensure that the files for `focus.js` can be found in your routing configuration.
+* To run, execute `node ./YOUR_DIR/route.js` or your custom script.
+
 ## Demo
 * [Basic Portfolio Website - Vanilla](https://spiderpig86.github.io/focus.js/test/vanilla/index.html)
 
