@@ -31,14 +31,23 @@
         parentElement: null,
         zoomFactor: '250%',
         smoother: true,
-        width: '100%',
-        height: '66.7%'
+        width: '100%', // Scale to parent component by default
+        height: '66.7%', // Scale to percent of height by default
+        cursor: '' // Leave blank for default cursor
     };
     new FocusImage(config); // Object will automatically be appended to the parent element
     ```
 * In any page that uses `focus.js`, ensure to include the packed version of your app `APP_NAME.min.js`.
 * Ensure that the files for `focus.js` can be found in your routing configuration.
 * To run, execute `node ./YOUR_DIR/route.js` or your custom script.
+
+## Cursors
+* Customize the cursors used with the Focus component.
+|Class|Description|
+|---|---|
+|`.cursor-arrow`|Uses the default arrow cursor for the component.|
+|`.cursor-grab`|Uses the grab cursor for the component (for when panning by dragging is supported).|
+|`.cursor-crosshair`|Uses a crosshair cursor for the component.|
 
 ## Demo
 * [Basic Portfolio Website - Vanilla](https://spiderpig86.github.io/focus.js/test/vanilla/index.html)
