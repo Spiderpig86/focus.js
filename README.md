@@ -43,11 +43,11 @@
 
 ## Cursors
 * Customize the cursors used with the Focus component.
-|Class|Description|
-|---|---|
-|`.cursor-arrow`|Uses the default arrow cursor for the component.|
-|`.cursor-grab`|Uses the grab cursor for the component (for when panning by dragging is supported).|
-|`.cursor-crosshair`|Uses a crosshair cursor for the component.|
+| Class | Description |
+| --- | --- |
+| `.cursor-arrow` | Uses the default arrow cursor for the component. |
+| `.cursor-grab` | Uses the grab cursor for the component (for when panning by dragging is supported). |
+| `.cursor-crosshair` | Uses a crosshair cursor for the component. |
 
 ## Demo
 * [Basic Portfolio Website - Vanilla](https://spiderpig86.github.io/focus.js/test/vanilla/index.html)
