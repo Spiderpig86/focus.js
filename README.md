@@ -42,7 +42,6 @@
 * To run, execute `node ./YOUR_DIR/route.js` or your custom script.
 
 ## Cursors
-* Customize the cursors used with the Focus component.
 | Class | Description |
 | --- | --- |
 | `.cursor-arrow` | Uses the default arrow cursor for the component. |
