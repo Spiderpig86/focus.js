@@ -26,7 +26,8 @@
             zoomFactor: '250%',
             smoother: true,
             width: '100%', // Scale to parent component by default
-            height: '66.7%' // Scale to percent of height by default
+            height: '66.7%', // Scale to percent of height by default
+            cursor: '' // Blank for default hand cursor
         }
 
         this.focusImg = document.createElement('div');
@@ -83,7 +84,8 @@
         this.focusImg.innerHTML  = `
             <div class="
                 focus-img 
-                ${this.params.smoother ? 'smoother' : ''}"
+                ${this.params.smoother ? 'smoother' : ''}
+                ${this.params.cursor ? this.params.cursor : ''}"
             style="
                 background-image: url(${this.params.imageSrc});
                 background-size: cover;

@@ -9,3 +9,18 @@
     -webkit-transition: all .2s;
     transition: all .2s
 }
+
+/* CURSOR TYPES */
+.focus-img.cursor-arrow {
+    cursor: default;
+}
+
+.focus-img.cursor-grab {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+
+.focus-img.cursor-crosshair {
+    cursor: crosshair;
+}

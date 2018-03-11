@@ -27,5 +27,6 @@ gulp.task('style', function() {
         .pipe(minify())
         .pipe(size())
         .pipe(concat('focus.min.css'))
-        .pipe(gulp.dest('./dist/styles'));
+        .pipe(gulp.dest('./dist/styles'))
+        .pipe(gulp.dest('./test/es6'));
 });

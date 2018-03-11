@@ -117,7 +117,8 @@ var FocusImg = function () {
             zoomFactor: '250%',
             smoother: true,
             width: '100%', // Scale to parent component by default
-            height: '66.7%' // Scale to percent of height by default
+            height: '66.7%', // Scale to percent of height by default
+            cursor: '' // Blank for default hand cursor
         };
 
         this.focusImg = document.createElement('div');
@@ -178,7 +179,7 @@ var FocusImg = function () {
         value: function render() {
 
             // Set the image element
-            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            </div>\n        ';
+            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '\n                ' + (this.params.cursor ? this.params.cursor : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            </div>\n        ';
 
             this.focusImg.style.width = this.params.width;
 
