@@ -62,5 +62,4 @@ new FocusImage({
     width: '100%', // Scale to parent component by default
     height: '66.7%', // Scale to percent of height by default
     cursor: 'cursor-crosshair', // Custom cursor
-    displayLoc: true,
 });

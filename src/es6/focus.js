@@ -33,6 +33,7 @@
         }
 
         this.focusImg = document.createElement('div');
+        this.focusImg.style.position = 'relative';
 
         // Apply given params to the object
         if (imageParams)
@@ -40,6 +41,14 @@
 
         this.render();
         this.bindEvents();
+
+        // Initialize control add-ons
+        this.displayLocHud = this.params.displayLoc ? document.createElement('span') : null;
+        if (this.params.displayLoc) {
+            this.displayLocHud.classList.add('hud', 'hud-bottom-right');
+            this.focusImg.appendChild(this.displayLocHud);
+            console.log(this.focusImg);
+        }
 
         return this;
     }
@@ -68,6 +77,12 @@
 
             // Update the image background position
             this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = this.percentX + '% ' + this.percentY + '%';
+
+            // Update HUD info if needed
+            if (this.params.displayLoc) {
+                this.displayLocHud.innerHTML = `${Math.floor(this.relX) || 0}, ${Math.floor(this.relY) || 0}`;
+            }
+            
         }, false);
 
         // Revert image view back to normal after mouse exits
@@ -81,7 +96,7 @@
      * Render the component onto the page
      */
     render() {
-
+        
         // Set the image element
         this.focusImg.innerHTML  = `
             <div class="
@@ -95,7 +110,6 @@
                 width: 100%;
                 padding-top: ${this.params.height};
             ">
-            ${this.params.displayLoc ? `<span id="locHud" class="hud hud-bottom-right>${this.relX || 0}, ${this.relY || 0}</span>` : ``}
             </div>
         `;
 

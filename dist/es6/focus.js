@@ -123,18 +123,22 @@ var FocusImg = function () {
             displayZoom: false // Displys the zoom hud
         };
 
-        this.relX = 0;
-        this.relY = 0;
-        this.percentX = 0;
-        this.percentY = 0;
-
         this.focusImg = document.createElement('div');
+        this.focusImg.style.position = 'relative';
 
         // Apply given params to the object
         if (imageParams) Object.assign(this.params, imageParams);
 
         this.render();
         this.bindEvents();
+
+        // Initialize control add-ons
+        this.displayLocHud = this.params.displayLoc ? document.createElement('span') : null;
+        if (this.params.displayLoc) {
+            this.displayLocHud.classList.add('hud', 'hud-bottom-right');
+            this.focusImg.appendChild(this.displayLocHud);
+            console.log(this.focusImg);
+        }
 
         return this;
     }
@@ -154,23 +158,25 @@ var FocusImg = function () {
                 _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = _this.params.zoomFactor;
             }, false);
 
-            var _relX = this.relX;
-            var _relY = this.relY;
-
             // Pan the image proportional to the cursor location
             this.focusImg.addEventListener('mousemove', function (e) {
                 var dimensions = _this.focusImg.getBoundingClientRect(); // Get client rectangle of the element on thepage
 
                 // Calculate location of cursor inside the element
-                _relX = e.clientX - dimensions.left;
-                _relY = e.clientY - dimensions.top;
+                _this.relX = e.clientX - dimensions.left;
+                _this.relY = e.clientY - dimensions.top;
 
                 // Calculate the cursor position as a percentage of the image
-                _this.percentX = Math.round(100 / (dimensions.width / _relX));
-                _this.percentY = Math.round(100 / (dimensions.height / _relY));
+                _this.percentX = Math.round(100 / (dimensions.width / _this.relX));
+                _this.percentY = Math.round(100 / (dimensions.height / _this.relY));
 
                 // Update the image background position
                 _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = _this.percentX + '% ' + _this.percentY + '%';
+
+                // Update HUD info if needed
+                if (_this.params.displayLoc) {
+                    _this.displayLocHud.innerHTML = (Math.floor(_this.relX) || 0) + ', ' + (Math.floor(_this.relY) || 0);
+                }
             }, false);
 
             // Revert image view back to normal after mouse exits
@@ -189,7 +195,7 @@ var FocusImg = function () {
         value: function render() {
 
             // Set the image element
-            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '\n                ' + (this.params.cursor ? this.params.cursor : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            ' + (this.params.displayLoc ? '<span class="hud hud-bottom-right>' + this.relX + ', ' + this.relY + '</span>' : '') + '\n            <span class="hud hud-bottom-right>' + this.relX + ', ' + this.relY + '</span>\n            </div>\n        ';
+            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '\n                ' + (this.params.cursor ? this.params.cursor : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            </div>\n        ';
 
             this.focusImg.style.width = this.params.width;
 
