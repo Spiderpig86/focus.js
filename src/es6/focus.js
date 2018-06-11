@@ -27,7 +27,9 @@
             smoother: true,
             width: '100%', // Scale to parent component by default
             height: '66.7%', // Scale to percent of height by default
-            cursor: '' // Blank for default hand cursor
+            cursor: '', // Blank for default hand cursor
+            displayLoc: false, // Displays the dimensions hud
+            displayZoom: false, // Displys the zoom hud
         }
 
         this.focusImg = document.createElement('div');
@@ -57,15 +59,15 @@
             let dimensions = this.focusImg.getBoundingClientRect(); // Get client rectangle of the element on thepage
 
             // Calculate location of cursor inside the element
-            let relX = e.clientX - dimensions.left;
-            let relY = e.clientY - dimensions.top;
+            this.relX = e.clientX - dimensions.left;
+            this.relY = e.clientY - dimensions.top;
 
             // Calculate the cursor position as a percentage of the image
-            let percentX = Math.round(100 / (dimensions.width / relX));
-            let percentY = Math.round(100 / (dimensions.height / relY));
+            this.percentX = Math.round(100 / (dimensions.width / this.relX));
+            this.percentY = Math.round(100 / (dimensions.height / this.relY));
 
             // Update the image background position
-            this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = percentX + '% ' + percentY + '%';
+            this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = this.percentX + '% ' + this.percentY + '%';
         }, false);
 
         // Revert image view back to normal after mouse exits
@@ -93,6 +95,7 @@
                 width: 100%;
                 padding-top: ${this.params.height};
             ">
+            ${this.params.displayLoc ? `<span id="locHud" class="hud hud-bottom-right>${this.relX || 0}, ${this.relY || 0}</span>` : ``}
             </div>
         `;
 

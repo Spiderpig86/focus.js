@@ -15,7 +15,9 @@
     function init() {
         console.log('Initializing focus.js...');
         var Focus = {};
-        Focus.init = function(elID) {
+        Focus.init = function(config) {
+            elID = config.elementID;
+
             // Iterate over all elements in the container by class
             var container = (elID !== '') ? document.getElementById(elID) : document; // The container
             var focusImgs = container.getElementsByClassName('focus-img'); // Get all the elements in the container that support zooming
