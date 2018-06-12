@@ -44,10 +44,16 @@
 
         // Initialize control add-ons
         this.displayLocHud = this.params.displayLoc ? document.createElement('span') : null;
+        this.displayZoomHud = this.params.displayZoom ? document.createElement('span') : null;
+
         if (this.params.displayLoc) {
             this.displayLocHud.classList.add('hud', 'hud-bottom-right');
             this.focusImg.appendChild(this.displayLocHud);
-            console.log(this.focusImg);
+        }
+
+        if (this.params.displayZoom) {
+            this.displayZoomHud.classList.add('hud', 'hud-bottom-left');
+            this.focusImg.appendChild(this.displayZoomHud);
         }
 
         return this;
@@ -81,6 +87,9 @@
             // Update HUD info if needed
             if (this.params.displayLoc) {
                 this.displayLocHud.innerHTML = `${Math.floor(this.relX) || 0}, ${Math.floor(this.relY) || 0}`;
+            }
+            if (this.params.displayZoom) {
+                this.displayZoomHud.innerHTML = `${Math.floor(this.percentX) || 0}, ${Math.floor(this.percentY) || 0}`;
             }
             
         }, false);

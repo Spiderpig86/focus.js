@@ -8,7 +8,7 @@
 }
 
 .focus-img:hover ~ .hud {
-    transition: all .1s;
+    transition: all .2s;
     opacity: 1;
 }
 
@@ -42,7 +42,7 @@
     background: rgba(0, 0, 0, 0.75);
     padding: .25rem .75rem;
     opacity: 0;
-    transition: all .1s;
+    transition: all .2s;
 }
 
 .hud-bottom-left {

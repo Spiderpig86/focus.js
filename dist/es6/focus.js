@@ -134,10 +134,16 @@ var FocusImg = function () {
 
         // Initialize control add-ons
         this.displayLocHud = this.params.displayLoc ? document.createElement('span') : null;
+        this.displayZoomHud = this.params.displayZoom ? document.createElement('span') : null;
+
         if (this.params.displayLoc) {
             this.displayLocHud.classList.add('hud', 'hud-bottom-right');
             this.focusImg.appendChild(this.displayLocHud);
-            console.log(this.focusImg);
+        }
+
+        if (this.params.displayZoom) {
+            this.displayZoomHud.classList.add('hud', 'hud-bottom-left');
+            this.focusImg.appendChild(this.displayZoomHud);
         }
 
         return this;
@@ -176,6 +182,9 @@ var FocusImg = function () {
                 // Update HUD info if needed
                 if (_this.params.displayLoc) {
                     _this.displayLocHud.innerHTML = (Math.floor(_this.relX) || 0) + ', ' + (Math.floor(_this.relY) || 0);
+                }
+                if (_this.params.displayZoom) {
+                    _this.displayZoomHud.innerHTML = (Math.floor(_this.percentX) || 0) + ', ' + (Math.floor(_this.percentY) || 0);
                 }
             }, false);
 

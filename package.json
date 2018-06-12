@@ -4,6 +4,7 @@
   "description": "A simple JavaScript library built for zooming in on images.",
   "main": "index.js",
   "scripts": {
+    "start": "node ./test/es6/route.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
