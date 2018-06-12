@@ -120,7 +120,7 @@ var FocusImg = function () {
             height: '66.7%', // Scale to percent of height by default
             cursor: '', // Blank for default hand cursor
             displayLoc: false, // Displays the dimensions hud
-            displayZoom: false // Displys the zoom hud
+            displayZoom: false // Displays the zoom hud
         };
 
         this.focusImg = document.createElement('div');
@@ -184,7 +184,7 @@ var FocusImg = function () {
                     _this.displayLocHud.innerHTML = (Math.floor(_this.relX) || 0) + ', ' + (Math.floor(_this.relY) || 0);
                 }
                 if (_this.params.displayZoom) {
-                    _this.displayZoomHud.innerHTML = (Math.floor(_this.percentX) || 0) + ', ' + (Math.floor(_this.percentY) || 0);
+                    _this.displayZoomHud.innerHTML = '' + _this.params.zoomFactor;
                 }
             }, false);
 

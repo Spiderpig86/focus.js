@@ -36,7 +36,6 @@
 /* HUD Displays */
 .hud {
     bottom: 0;
-    right: 0;
     position: absolute;
     color: #fff;
     background: rgba(0, 0, 0, 0.75);

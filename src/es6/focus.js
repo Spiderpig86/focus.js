@@ -29,7 +29,7 @@
             height: '66.7%', // Scale to percent of height by default
             cursor: '', // Blank for default hand cursor
             displayLoc: false, // Displays the dimensions hud
-            displayZoom: false, // Displys the zoom hud
+            displayZoom: false, // Displays the zoom hud
         }
 
         this.focusImg = document.createElement('div');
@@ -89,7 +89,7 @@
                 this.displayLocHud.innerHTML = `${Math.floor(this.relX) || 0}, ${Math.floor(this.relY) || 0}`;
             }
             if (this.params.displayZoom) {
-                this.displayZoomHud.innerHTML = `${Math.floor(this.percentX) || 0}, ${Math.floor(this.percentY) || 0}`;
+                this.displayZoomHud.innerHTML = `${this.params.zoomFactor}`;
             }
             
         }, false);
