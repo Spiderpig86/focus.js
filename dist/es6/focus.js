@@ -120,7 +120,8 @@ var FocusImg = function () {
             height: '66.7%', // Scale to percent of height by default
             cursor: '', // Blank for default hand cursor
             displayLoc: false, // Displays the dimensions hud
-            displayZoom: false // Displays the zoom hud
+            displayZoom: false, // Displays the zoom hud
+            zoomOnScroll: false // Enable scrolling for zooming image
         };
 
         this.focusImg = document.createElement('div');
@@ -180,12 +181,8 @@ var FocusImg = function () {
                 _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = _this.percentX + '% ' + _this.percentY + '%';
 
                 // Update HUD info if needed
-                if (_this.params.displayLoc) {
-                    _this.displayLocHud.innerHTML = (Math.floor(_this.relX) || 0) + ', ' + (Math.floor(_this.relY) || 0);
-                }
-                if (_this.params.displayZoom) {
-                    _this.displayZoomHud.innerHTML = '' + _this.params.zoomFactor;
-                }
+                if (_this.params.displayLoc) _this.updateLocHud();
+                if (_this.params.displayZoom) _this.updateZoomHud();
             }, false);
 
             // Revert image view back to normal after mouse exits
@@ -193,6 +190,28 @@ var FocusImg = function () {
                 _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = 'center';
                 _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = 'cover';
             }, false);
+
+            this.focusImg.addEventListener('wheel', function (e) {
+                if (!_this.params.zoomOnScroll) return;
+
+                e.preventDefault();
+                var curZoom = parseInt(_this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize.replace('%', ''));
+
+                // Set bounds
+                if (curZoom <= 40 && e.deltaY > 0) {
+                    _this.params.zoomFactor = '40%';
+                    return;
+                }
+
+                if (curZoom >= 1000 && e.deltaY < 0) {
+                    _this.params.zoomFactor = '1000%';
+                    return;
+                }
+
+                _this.params.zoomFactor = curZoom + (e.deltaY <= 0 ? 10 : -10) + '%';
+                _this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = '' + _this.params.zoomFactor;
+                _this.updateZoomHud();
+            });
         }
 
         /**
@@ -204,12 +223,27 @@ var FocusImg = function () {
         value: function render() {
 
             // Set the image element
-            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '\n                ' + (this.params.cursor ? this.params.cursor : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            </div>\n        ';
+            this.focusImg.innerHTML = '\n            <div class="\n                focus-img \n                ' + (this.params.smoother ? 'smoother' : '') + '\n                ' + (this.params.cursor ? this.params.cursor : '') + '"\n            style="\n                background-image: url(' + this.params.imageSrc + ');\n                background-repeat: no-repeat;\n                background-size: cover;\n                background-position: center center;\n                width: 100%;\n                padding-top: ' + this.params.height + ';\n            ">\n            </div>\n        ';
 
             this.focusImg.style.width = this.params.width;
 
             // Append to parent
             this.params.parentElement.appendChild(this.focusImg);
+        }
+
+        /**
+         * HELPERS
+         */
+
+    }, {
+        key: 'updateLocHud',
+        value: function updateLocHud() {
+            this.displayLocHud.innerHTML = (Math.floor(this.relX) || 0) + ', ' + (Math.floor(this.relY) || 0);
+        }
+    }, {
+        key: 'updateZoomHud',
+        value: function updateZoomHud() {
+            this.displayZoomHud.innerHTML = '' + this.params.zoomFactor;
         }
     }]);
 

@@ -94,3 +94,19 @@ new FocusImage({
     cursor: 'cursor-crosshair', // Custom cursor
     displayZoom: true,
 });
+
+col = document.createElement('div');
+col.className = 'col-6';
+document.querySelector("#images4").appendChild(col);
+new FocusImage({
+    imageSrc: 'https://source.unsplash.com/random',
+    parentElement: col,
+    zoomFactor: '250%',
+    smoother: true,
+    width: '100%', // Scale to parent component by default
+    height: '66.7%', // Scale to percent of height by default
+    cursor: 'cursor-crosshair', // Custom cursor
+    displayLoc: true,
+    displayZoom: true,
+    zoomOnScroll: true,
+});

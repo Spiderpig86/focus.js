@@ -30,6 +30,7 @@
             cursor: '', // Blank for default hand cursor
             displayLoc: false, // Displays the dimensions hud
             displayZoom: false, // Displays the zoom hud
+            zoomOnScroll: false, // Enable scrolling for zooming image
         }
 
         this.focusImg = document.createElement('div');
@@ -85,12 +86,8 @@
             this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = this.percentX + '% ' + this.percentY + '%';
 
             // Update HUD info if needed
-            if (this.params.displayLoc) {
-                this.displayLocHud.innerHTML = `${Math.floor(this.relX) || 0}, ${Math.floor(this.relY) || 0}`;
-            }
-            if (this.params.displayZoom) {
-                this.displayZoomHud.innerHTML = `${this.params.zoomFactor}`;
-            }
+            if (this.params.displayLoc) this.updateLocHud();
+            if (this.params.displayZoom) this.updateZoomHud();
             
         }, false);
 
@@ -99,6 +96,28 @@
             this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundPosition = 'center';
             this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = 'cover';
         }, false);
+
+        this.focusImg.addEventListener('wheel', (e) => {
+            if (!this.params.zoomOnScroll) return;
+
+            e.preventDefault();
+            const curZoom = parseInt(this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize.replace('%', ''));
+            
+            // Set bounds
+            if (curZoom <= 40 && e.deltaY > 0) {
+                this.params.zoomFactor = `40%`;
+                return;
+            }
+
+            if (curZoom >= 1000 && e.deltaY < 0) {
+                this.params.zoomFactor = `1000%`;
+                return;
+            }
+
+            this.params.zoomFactor = `${curZoom + ((e.deltaY <= 0) ? 10 : -10)}%`;
+            this.focusImg.getElementsByClassName('focus-img')[0].style.backgroundSize = `${this.params.zoomFactor}`;
+            this.updateZoomHud();
+        });
     }
 
     /**
@@ -114,6 +133,7 @@
                 ${this.params.cursor ? this.params.cursor : ''}"
             style="
                 background-image: url(${this.params.imageSrc});
+                background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center center;
                 width: 100%;
@@ -126,6 +146,17 @@
 
         // Append to parent
         this.params.parentElement.appendChild(this.focusImg);
+    }
+
+    /**
+     * HELPERS
+     */
+    updateLocHud() {
+        this.displayLocHud.innerHTML = `${Math.floor(this.relX) || 0}, ${Math.floor(this.relY) || 0}`;
+    }
+
+    updateZoomHud() {
+        this.displayZoomHud.innerHTML = `${this.params.zoomFactor}`;
     }
  }
 
