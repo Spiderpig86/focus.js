@@ -3,17 +3,21 @@
 
 ## Getting Started
 ### Vanilla
+* **This version will no longer get new updates and is only here for legacy browsers. New features will be added in ES6 version.**
 * For now, download the minified version of the library in the `dist` folder and add a script tag to your page.
     ```HTML
     <script src='../../dist/vanilla/focus.min.js'></script>
     ```
-* After adding the tag to the page, initialize the library.
+* After adding the tag to the page, initialize the library with a config object (params could be excluded).
     ```HTML
     <script>
-        Focus.init('');
+        Focus.init({
+            elementID: '',
+            zoomFactor: '250%'
+        });
     </script>
     ```
-    * To change the scope of elements that focus.js applies to, insert the id of the element inside `init('exampleID');`. Otherwise, a blank string would apply it to the entire page.
+    * To change the scope of elements that focus.js applies to, assign the parent id to the `elementID` field to target its children. Otherwise, a blank string would apply it to the entire page.
 * Add the `focus-img` class to any image you want to be zoomable.
 * To reduce stuttering on the image, add the `smoother` class to the images you want.
 
@@ -33,7 +37,10 @@
         smoother: true,
         width: '100%', // Scale to parent component by default
         height: '66.7%', // Scale to percent of height by default
-        cursor: '' // Leave blank for default cursor
+        cursor: '', // Leave blank for default cursor
+        displayLoc: true,
+        displayZoom: true,
+        zoomOnScroll: true,
     };
     new FocusImage(config); // Object will automatically be appended to the parent element
     ```
