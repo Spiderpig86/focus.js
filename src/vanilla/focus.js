@@ -7,7 +7,7 @@
     /**
      * CONSTANTS
      */
-    var ZOOMFACTOR = "250%"; // Default zoom factor of the image when user hovers with mouse
+    var ZOOMFACTOR = '250%'; // Default zoom factor of the image when user hovers with mouse
 
     /**
      * Initializes the focus object with properties and methods
@@ -15,12 +15,24 @@
     function init() {
         console.log('Initializing focus.js...');
         var Focus = {};
+        
+        /**
+         * 
+         * @param {*} config - follows this structure:
+         *      {
+         *          elementID
+         *          zoomFactor
+         *      }
+         */
         Focus.init = function(config) {
             elID = config.elementID;
+            ZOOMFACTOR = config.zoomFactor || '250%';
+
+            console.log(ZOOMFACTOR, config.zoomFactor);
 
             // Iterate over all elements in the container by class
             var container = (elID !== '') ? document.getElementById(elID) : document; // The container
-            var focusImgs = container.getElementsByClassName('focus-img'); // Get all the elements in the container that support zooming
+            var focusImgs = container.querySelectorAll('.focus-img'); // Get all the elements in the container that support zooming
 
             // Add handlers for each image element
             Array.from(focusImgs).forEach(function(img) {
@@ -51,8 +63,8 @@
 
                 // Add handler for when the user leaves
                 img.addEventListener('mouseleave', function(e) {
-                    this.style.backgroundPosition = "center";
-                    this.style.backgroundSize = "cover";
+                    this.style.backgroundPosition = 'center';
+                    this.style.backgroundSize = 'cover';
                 }, false);
             });
         }
@@ -63,6 +75,6 @@
     if (typeof(Focus) === 'undefined')
         window.Focus = init();
     else
-        console.log("focus.js has been initialized already.");
+        console.log('focus.js has been initialized already.');
 
 })(window); // Loads the library in window object
